@@ -34,11 +34,10 @@ def intentar_alfabeto_odometro(password, alphabet, max_len):
     start = time.time()
 
     for length in range(1, max_len + 1):
-        # indices actúan como un "odómetro" en base len(alphabet)
         indices = [0] * length
         finished = False
         while not finished:
-            # construir intento a partir de indices
+        
             guess = "".join(alphabet[i] for i in indices)
             attempts += 1
             if guess == password:
@@ -48,7 +47,6 @@ def intentar_alfabeto_odometro(password, alphabet, max_len):
                 print("Intentos:", attempts)
                 print(f"Tiempo: {elapsed:.4f} segundos")
                 return True
-            # incrementar el odómetro
             pos = length - 1
             while pos >= 0:
                 if indices[pos] < base - 1:
@@ -71,7 +69,7 @@ def main():
     password = input("Introduce la contraseña a adivinar: ").strip()
     alphabet = elegir_alfabeto()
 
-    # comprobar si todos los caracteres de la contraseña están en el alfabeto elegido
+
     faltantes = set(password) - set(alphabet)
     if faltantes:
         print("\nATENCIÓN: la contraseña tiene caracteres fuera del alfabeto elegido:", "".join(sorted(faltantes)))
@@ -82,7 +80,7 @@ def main():
         else:
             print("Continuando, pero no se encontrará la contraseña si falta algún carácter.")
 
-    # pedir longitud máxima a probar (por defecto = longitud de la contraseña)
+
     max_len_input = input(f"Longitud máxima a probar (por defecto = {len(password)}): ").strip()
     try:
         max_len = int(max_len_input) if max_len_input else len(password)
@@ -98,4 +96,5 @@ def main():
         print("\nProceso detenido por el usuario.")
 
 if __name__ == "__main__":
+
     main()
